@@ -80,3 +80,27 @@ To be able to see that Prisma has created a new table to our database we have to
 And after that we will surely see our User table
 
 In the model User we added a property called *@@map()* to name the database instead of User with Pascal case and in singular, we create the model the way we want but by using *@@map()* we can rename it only in the database. After that we need to run the migration once again for the changes to take effect.
+
+In case we stop Docker, or it is not running we run the following command to start the database container
+
+```docker
+docker start pg-fincheck
+```
+
+## Nest.js - Pipes
+
+We are using pipes to validate our cases. Pipes can be used to tranaform or to validate. We are using the dependency from Nest.js, to install it we can use the following command:
+
+```Javascript
+yarn add class-validator class-transformer
+```
+
+Pipes are cool but we would have to be adding pipes all over the application, we might end up forgetting to add the decorator *@UsePipes* and also forget to instantiate the *ValidationPipe()*, and we might end up not knowing why the pipes are not working. And to avoid that we are gonna use **Global Pipes**.
+Global Pipes are to be added in the main.ts file after the app variable created there.
+
+```Javascript
+app.useGlobalPipes(new ValidationPipe());
+```
+And by adding the code above we only have to add pipes to our DTOs and everything will work just fine 😉.
+
+**OBS:** Pipes are added in the DTO file and for it to work we also have to use it in the controller.
