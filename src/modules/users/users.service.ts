@@ -1,19 +1,20 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-import { PrismaService } from 'src/database/prisma.service';
 import { hash } from 'bcryptjs';
+import { UsersRepository } from 'src/shared/database/repositories/users.repositories';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(private readonly usersRepo: UsersRepository) {}
 
   async create(createUserDto: CreateUserDto) {
     const { name, email, password } = createUserDto;
 
     // Validation of the email, in the prisma schema we added the id and email to be unique
     // So if we try to create a new user with an existing email in the database it will not allow us to do that
-    const emailAlreadyTaken = await this.prismaService.user.findUnique({
+    const emailAlreadyTaken = await this.usersRepo.findUnique({
       where: { email },
+      select: { id: true },
     });
     // Custom email message added
     if (emailAlreadyTaken) {
@@ -24,7 +25,7 @@ export class UsersService {
     // It will make the lives of hackers more difficult
     const hashedPassword = await hash(password, 10);
 
-    const user = await this.prismaService.user.create({
+    const user = await this.usersRepo.create({
       data: {
         name,
         email,

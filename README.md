@@ -104,3 +104,13 @@ app.useGlobalPipes(new ValidationPipe());
 And by adding the code above we only have to add pipes to our DTOs and everything will work just fine 😉.
 
 **OBS:** Pipes are added in the DTO file and for it to work we also have to use it in the controller.
+
+## Passwords Encrypted
+
+We used [bcryptjs](https://www.npmjs.com/package/bcryptjs) to safely save our passwords in the database encrypted, to avoid simply saving them as plain text.
+
+## Repositories
+
+We created repositories to abstract Prisma from our code. We added Prisma Service in the Users Repositories so that all the users can make use of Prisma. And by doing so we can even swap Prisma for TypeORM and it would work as long as we obey the object structure and naming.
+
+Also created Database Module to use in all of our application without having to import it everywhere. We used the decorator **@Global()** and exported UsersRepository so that anyone who uses the UsersRepository will be making use of our Database with no need to import it.
