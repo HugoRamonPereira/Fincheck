@@ -2,7 +2,7 @@
 
 Our diagrams were drawn and planned using [Lucid Chart](https://www.lucidchart.com/)
 
-## DATABASE - POSTGRES WITH DOCKER
+## Database - Postgres with Docker
 
 The database we chose to use was [Postgres](https://www.postgresql.org/) and we are using [Docker](https://www.docker.com/) to hold it, instead of using it on our machine.
 
@@ -114,3 +114,7 @@ We used [bcryptjs](https://www.npmjs.com/package/bcryptjs) to safely save our pa
 We created repositories to abstract Prisma from our code. We added Prisma Service in the Users Repositories so that all the users can make use of Prisma. And by doing so we can even swap Prisma for TypeORM and it would work as long as we obey the object structure and naming.
 
 Also created Database Module to use in all of our application without having to import it everywhere. We used the decorator **@Global()** and exported UsersRepository so that anyone who uses the UsersRepository will be making use of our Database with no need to import it.
+
+## Authentication and Authorization
+
+For Authentication we will use JWT - JSON Web Token. And we are using the [Nest.js](https://docs.nestjs.com/security/authentication#jwt-token) implementation of the JWT instead of using the most popular dependency used by the market.
