@@ -118,3 +118,12 @@ Also created Database Module to use in all of our application without having to 
 ## Authentication and Authorization
 
 For Authentication we will use JWT - JSON Web Token. And we are using the [Nest.js](https://docs.nestjs.com/security/authentication#jwt-token) implementation of the JWT instead of using the most popular dependency used by the market.
+
+### AuthGuards
+
+We are using AuthGuards from Nest.js to require the user to be authenticated in order to have access to the pages. 
+We are using the AuthGuards globally and there are 2 routes that will be forever public: signin and signout. We used the decorator **@SetMetadata** in the controller that has these 2 routes and passed the values IS_PUBLIC and we accessed these values passed in the decorator mentioned above using the **Reflector** from Nestjs/core in the auth.guard.ts file.
+
+## Custom Decorator
+
+I created a custom decorator named IsPublic where it simply returns the **@SetMetadata** code that we previously had in the auth.controller
