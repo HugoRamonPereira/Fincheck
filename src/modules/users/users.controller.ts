@@ -1,5 +1,6 @@
-import { Controller, Get, Req } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { ActiveUserId } from 'src/shared/decorators/ActiveUserId';
 
 @Controller('users')
 export class UsersController {
@@ -7,7 +8,7 @@ export class UsersController {
 
   // This route me is created only to get the id of the user in the accessToken that we passed using the sub which is the subject
   @Get('/me')
-  me(@Req() request: any) {
-    return this.usersService.getUserById(request.userId);
+  me(@ActiveUserId() userId: string) {
+    return this.usersService.getUserById(userId);
   }
 }
