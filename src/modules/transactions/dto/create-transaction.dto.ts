@@ -20,6 +20,10 @@ export class CreateTransactionDto {
   @IsUUID()
   categoryId: string;
 
+  @IsString()
+  @IsNotEmpty()
+  name: string;
+
   @IsNumber()
   @IsNotEmpty()
   @IsPositive()
@@ -28,10 +32,6 @@ export class CreateTransactionDto {
   @IsNotEmpty()
   @IsDateString()
   date: string;
-
-  @IsString()
-  @IsNotEmpty()
-  name: string;
 
   @IsNotEmpty()
   @IsEnum(TransactionType)
