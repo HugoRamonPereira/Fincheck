@@ -1,8 +1,17 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
-import { TransactionsService } from './transactions.service';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Body,
+  Param,
+  Delete,
+  ParseUUIDPipe,
+} from '@nestjs/common';
+import { TransactionsService } from './services/transactions.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { ActiveUserId } from 'src/shared/decorators/ActiveUserId';
-// import { UpdateTransactionDto } from './dto/update-transaction.dto';
+import { UpdateTransactionDto } from './dto/update-transaction.dto';
 
 @Controller('transactions')
 export class TransactionsController {
@@ -21,13 +30,18 @@ export class TransactionsController {
     return this.transactionsService.findAllByUserId(userId);
   }
 
-  // @Put(':id')
-  // update(
-  //   @Param('id') id: string,
-  //   @Body() updateTransactionDto: UpdateTransactionDto,
-  // ) {
-  //   return this.transactionsService.update(+id, updateTransactionDto);
-  // }
+  @Put(':transactionId')
+  update(
+    @ActiveUserId() userId: string,
+    @Param('transactionId', ParseUUIDPipe) transactionId: string,
+    @Body() updateTransactionDto: UpdateTransactionDto,
+  ) {
+    return this.transactionsService.update(
+      userId,
+      transactionId,
+      updateTransactionDto,
+    );
+  }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
