@@ -11,7 +11,7 @@ export function AuthGuard({ isPrivate }: AuthGuardProps) {
   // So if the user is trying to access a private route the route will be replaced and there will be no history
   // No history for the user to be going back to, by clicking in the arrows
   if (!signedIn && isPrivate) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/signin" replace />;
   }
 
   if (signedIn && !isPrivate) {

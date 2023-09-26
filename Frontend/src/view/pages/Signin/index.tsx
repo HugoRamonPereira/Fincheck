@@ -6,15 +6,15 @@ export function Signin() {
   return (
     <>
       <header className="flex flex-col items-center gap-4 text-center">
-        <h1 className="text-2xl font-semibold text-gray-900">
+        <h1 className="text-2xl font-Montserrat font-semibold text-gray-900">
         Log into your account
         </h1>
 
         <p className='space-x-3'>
-          <span className='text-gray-700'>
+          <span className='font-Montserrat text-gray-700'>
           Don&apos;t have an account?
           </span>
-          <Link to='/signup' className='text-teal-900 font-medium'>
+          <Link to='/signup' className='text-teal-900 font-Montserrat font-medium'>
             Sign up
           </Link>
         </p>
