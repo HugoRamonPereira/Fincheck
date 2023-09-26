@@ -6,21 +6,21 @@ export function Signup() {
   return (
     <>
       <header className="flex flex-col items-center gap-4 text-center">
-        <h1 className="text-2xl font-semibold font-Montserrat text-gray-900">
+        <h1 className="text-xl lg:text-2xl font-Montserrat font-semibold text-gray-900">
           Create your account
         </h1>
 
-        <p className='space-x-3'>
-          <span className='text-gray-700 font-Montserrat'>
+        <p className='flex md:flex-none flex-col md:flex-row space-x-3'>
+          <span className='text-sm lg:text-base text-gray-700 font-Montserrat'>
           Already have an account?
           </span>
-          <Link to='/signin' className='text-teal-900 font-Montserrat font-medium'>
+          <Link to='/signin' className='text-sm lg:text-base text-teal-900 font-Montserrat font-medium'>
             Sign in
           </Link>
         </p>
       </header>
 
-      <form className='mt-16 flex flex-col gap-4'>
+      <form className='mt-8 lg:mt-12 flex flex-col gap-4'>
         <Input
           type="name"
           placeholder='Name'
