@@ -25,9 +25,42 @@ export class BankAccountsService {
     });
   }
 
-  findAllByUserId(userId: string) {
-    return this.bankAccountsRepo.findMany({
+  async findAllByUserId(userId: string) {
+    const bankAccounts = await this.bankAccountsRepo.findMany({
       where: { userId },
+      // Include is being used to include the transactions selecting the type and the value
+      // So that we can add or subtract to the value of the balance
+      include: {
+        transactions: {
+          select: {
+            type: true,
+            value: true,
+          },
+        },
+      },
+    });
+
+    return bankAccounts.map(({ transactions, ...bankAccount }) => {
+      // This reduce function is adding in case the transaction type is INCOME
+      // If not it will subtract this is why we have the minus sign before the (-transaction.value)
+      // In Math if we 100 + 10 = 110
+      // But if we try to calculate 100 + (-10), the value will be 90, + and - combined will result in subtraction
+      const transactionsBalance = transactions.reduce(
+        (acc, transaction) =>
+          acc +
+          (transaction.type === 'INCOME'
+            ? transaction.value
+            : -transaction.value),
+        0,
+      );
+
+      const currentBalance = bankAccount.initialBalance + transactionsBalance;
+
+      return {
+        ...bankAccount,
+        currentBalance,
+        transactions,
+      };
     });
   }
 
