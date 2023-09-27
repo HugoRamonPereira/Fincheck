@@ -20,10 +20,10 @@ export function AuthLayout() {
         <img
           src={illustration}
           alt="transactions-illustration"
-          className='w-full h-full max-w-[656px] max-h-[960px] select-none'
+          className='w-full h-full max-w-[656px] max-h-[960px] select-none border rounded-[32px] border-gray-400'
         />
 
-        <div className='max-w-[656px] bottom-8 mx-8 bg-white p-10 absolute rounded-b-[32px]'>
+        <div className='max-w-[656px] bottom-8 mx-8 bg-white p-10 absolute rounded-b-[32px] border border-gray-400'>
           <Logo className='text-teal-900 h-7' />
           <p className='text-gray-700 font-Montserrat font-normal mt-4 tracking-wider'>
             Manage your personal finances in a simple way with <span className='text-teal-900 font-medium'>Fincheck</span>, and by the way, it&apos;s totally free!
