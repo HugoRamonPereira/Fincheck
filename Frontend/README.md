@@ -24,3 +24,11 @@ For icons we used icons from [Radix](https://www.radix-ui.com/) the package we u
 
 When we ran into issues where we needed to apply conditional classes using TailwindCSS we had to install [CLSX](https://www.npmjs.com/package/clsx)
 with [Tailwind-Merge](https://www.npmjs.com/package/tailwind-merge)
+
+### Handle requests to the API
+
+We are using [Axios](https://axios-http.com/) along with [React-Query](https://tanstack.com/) to make requests assynchronously and store data in a cache.
+
+### Toast Messages
+
+For Toast Messages throughout our application we are using [React-Hot-Toast](https://react-hot-toast.com/)
