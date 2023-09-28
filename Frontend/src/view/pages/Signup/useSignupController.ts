@@ -1,7 +1,12 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { authService } from '../../../services/AuthService';
+import { SignupProps } from '../../../services/AuthService/signup';
+
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+import { useMutation } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 
 const schema = z.object({
   name: z.string().nonempty('Name is required'),
@@ -20,12 +25,19 @@ export function useSignupController() {
     resolver: zodResolver(schema)
   });
 
-  const handleSubmit = hookFormSubmit(async (data) => {
-    const { accessToken } = await authService.signup(data);
-
-    console.log(accessToken);
-
+  const { mutateAsync, isLoading } = useMutation({
+    mutationFn: async (data: SignupProps) => {
+      return authService.signup(data);
+    }
   });
 
-  return { register, handleSubmit, errors };
+  const handleSubmit = hookFormSubmit(async (data) => {
+    try {
+      await mutateAsync(data);
+    } catch (error) {
+      toast.error('An error ocurred while creating your account!');
+    }
+  });
+
+  return { register, handleSubmit, errors, isLoading };
 }
