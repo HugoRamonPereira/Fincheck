@@ -1,5 +1,5 @@
-import { authService } from '../../../services/AuthService';
-import { SignupProps } from '../../../services/AuthService/signup';
+import { authService } from '../../../app/services/AuthService';
+import { SignupProps } from '../../../app/services/AuthService/signup';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';

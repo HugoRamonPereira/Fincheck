@@ -1,11 +1,12 @@
 import { Navigate, Outlet } from 'react-router-dom';
+import { useAuth } from '../app/hooks/useAuth/useAuth';
 
 type AuthGuardProps = {
   isPrivate: boolean;
 }
 
 export function AuthGuard({ isPrivate }: AuthGuardProps) {
-  const signedIn = false;
+  const { signedIn } = useAuth();
 
   // The property replace was added to avoid saving browsing history in cache
   // So if the user is trying to access a private route the route will be replaced and there will be no history
