@@ -4,7 +4,7 @@ import { Button } from '../../components/Button';
 import { useSigninController } from './useSigninController';
 
 export function Signin() {
-  const { handleSubmit, register, errors } = useSigninController();
+  const { handleSubmit, register, errors, isLoading } = useSigninController();
 
   return (
     <>
@@ -40,7 +40,9 @@ export function Signin() {
           error={errors.password?.message}
           {...register('password')}
         />
-        <Button type="submit" className='mt-2'>Sign in</Button>
+        <Button type="submit" className='mt-2' isLoading={isLoading}>
+          Sign in
+        </Button>
       </form>
     </>
   );

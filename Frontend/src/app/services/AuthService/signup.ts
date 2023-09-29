@@ -1,5 +1,5 @@
-import { sleep } from '../../app/utils/sleep';
-import { httpClient } from './../HttpClient/httpClient';
+import { sleep } from '../../utils/sleep';
+import { httpClient } from '../HttpClient/httpClient';
 
 export interface SignupProps {
   name: string;
