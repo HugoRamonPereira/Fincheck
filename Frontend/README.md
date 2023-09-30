@@ -32,3 +32,8 @@ We are using [Axios](https://axios-http.com/) along with [React-Query](https://t
 ### Toast Messages
 
 For Toast Messages throughout our application we are using [React-Hot-Toast](https://react-hot-toast.com/)
+
+### Accounts to test signin
+
+ramoneee@gmail.com  123456789
+hramonper@gmail.com   12345666789
