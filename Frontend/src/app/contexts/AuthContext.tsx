@@ -2,8 +2,8 @@ import { ReactNode, createContext, useCallback, useEffect, useState } from 'reac
 import { localStorageKeys } from '../config/localStorageKeys';
 import { useQuery } from '@tanstack/react-query';
 import { usersService } from '../services/UsersService';
-import { httpClient } from '../services/HttpClient/httpClient';
 import toast from 'react-hot-toast';
+import { PageLoader } from '../../view/components/PageLoader';
 
 interface AuthContextValue {
   signedIn: boolean;
@@ -21,10 +21,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return !!storedAccessToken;
   });
 
-  const { isError } = useQuery({
+  const { isError, data, isFetching, isSuccess } = useQuery({
     queryKey: ['users', 'me'],
     queryFn: () => usersService.me(),
-    enabled: signedIn
+    // enabled is to trigger the request, so the request is gonna happen only if the user is signedin
+    // we passed the value signedin which is a state, when it is true, then the request happens
+    enabled: signedIn,
+    staleTime: Infinity,
   });
 
   // Function to signin and store the token in localStorage
@@ -51,8 +54,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [isError, signout]);
 
+  if (isFetching) {
+    return <PageLoader />;
+  }
+
   return (
-    <AuthContext.Provider value={{ signedIn, signin, signout }}>
+    <AuthContext.Provider value={{
+      // isSuccess comes from React-Query, so this indicates that we are only signedIn if the request is successful
+      signedIn: isSuccess && signedIn,
+      signin,
+      signout
+    }}>
       {children}
     </AuthContext.Provider>
   );
