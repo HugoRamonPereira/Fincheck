@@ -3,7 +3,7 @@ import { localStorageKeys } from '../config/localStorageKeys';
 import { useQuery } from '@tanstack/react-query';
 import { usersService } from '../services/UsersService';
 import toast from 'react-hot-toast';
-import { PageLoader } from '../../view/components/PageLoader';
+import { LaunchScreen } from '../../view/components/LaunchScreen';
 
 interface AuthContextValue {
   signedIn: boolean;
@@ -21,7 +21,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return !!storedAccessToken;
   });
 
-  const { isError, data, isFetching, isSuccess } = useQuery({
+  const { isError, isFetching, isSuccess } = useQuery({
     queryKey: ['users', 'me'],
     queryFn: () => usersService.me(),
     // enabled is to trigger the request, so the request is gonna happen only if the user is signedin
@@ -54,10 +54,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [isError, signout]);
 
-  if (isFetching) {
-    return <PageLoader />;
-  }
-
   return (
     <AuthContext.Provider value={{
       // isSuccess comes from React-Query, so this indicates that we are only signedIn if the request is successful
@@ -65,7 +61,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       signin,
       signout
     }}>
-      {children}
+      <LaunchScreen isLoading={isFetching} />
+      {!isFetching && children}
     </AuthContext.Provider>
   );
 }
