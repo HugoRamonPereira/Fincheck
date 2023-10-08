@@ -62,6 +62,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       signout
     }}>
       <LaunchScreen isLoading={isFetching} />
+      {/* The children will only be rendered when there is no ongoing requests */}
       {!isFetching && children}
     </AuthContext.Provider>
   );
