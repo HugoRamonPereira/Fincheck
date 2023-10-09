@@ -5,7 +5,7 @@ import { useMutation } from '@tanstack/react-query';
 import { authService } from '../../../app/services/AuthService';
 import toast from 'react-hot-toast';
 import { SigninProps } from '../../../app/services/AuthService/signin';
-import { useAuth } from '../../../app/hooks/useAuth/useAuth';
+import { useAuth } from '../../../app/hooks/useAuth';
 
 const schema = z.object({
   email: z.string().nonempty('Email is required').email('Email is not valid'),
