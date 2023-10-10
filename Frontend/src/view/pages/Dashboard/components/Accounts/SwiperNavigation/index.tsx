@@ -1,12 +1,12 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import { useSwiper } from 'swiper/react';
 
-interface AccountsSwiperNavigationProps {
+interface SwiperNavigationProps {
   isBeginning: boolean;
   isEnd: boolean;
 }
 
-export function AccountsSwiperNavigation({ isBeginning, isEnd }: AccountsSwiperNavigationProps) {
+export function SwiperNavigation({ isBeginning, isEnd }: SwiperNavigationProps) {
   const swiper = useSwiper();
 
   return (
