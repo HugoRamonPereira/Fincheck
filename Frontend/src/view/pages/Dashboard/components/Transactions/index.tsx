@@ -7,8 +7,12 @@ import { SwiperOption } from './SwiperOption';
 import { SwiperNavigation } from './SwiperNavigation';
 import { formatCurrency } from '../../../../../app/utils/formatCurrency';
 import { CategoryIcon } from '../../../../components/icons/categories/CategoryIcon';
+import { useTransactionsController } from './useTransactionsController';
+import { cn } from '../../../../../app/utils/cn';
 
 export function Transactions() {
+  const { valuesVisible } = useTransactionsController();
+
   return (
     <div className="bg-gray-100 flex flex-col rounded-2xl w-full h-full sm:px-5 sm:py-10 md:p-10 border border-gray-300">
       <header className="">
@@ -52,7 +56,10 @@ export function Transactions() {
             </div>
           </div>
 
-          <span className='font-Montserrat text-red-800'>
+          <span className={cn(
+            'font-Montserrat text-red-800',
+            !valuesVisible && 'blur-[7px]'
+          )}>
             {formatCurrency(-1240)}
           </span>
         </div>
@@ -65,7 +72,10 @@ export function Transactions() {
             </div>
           </div>
 
-          <span className='font-Montserrat text-green-800'>
+          <span className={cn(
+            'font-Montserrat text-green-800',
+            !valuesVisible && 'blur-[7px]'
+          )}>
             {formatCurrency(4500)}
           </span>
         </div>
