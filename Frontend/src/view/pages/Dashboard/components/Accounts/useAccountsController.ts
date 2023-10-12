@@ -1,14 +1,23 @@
 import { useState } from 'react';
 import { useWindowWidth } from '../../../../../app/hooks/useWindowWidth';
+import { useDashboard } from '../DashboardContext/useDashboard';
 
 export function useAccountsController() {
   const windowWidth  = useWindowWidth();
+  const { valuesVisible, toggleValuesVisibility } = useDashboard();
+
   const [sliderState, setSliderState] = useState({
     isBeginning: true,
     isEnd: false
   });
 
-  return { sliderState, setSliderState, windowWidth };
+  return {
+    sliderState,
+    setSliderState,
+    windowWidth,
+    valuesVisible,
+    toggleValuesVisibility
+  };
 }
 
 // the variable windowWidth is not destructured we named it like this

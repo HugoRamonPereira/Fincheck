@@ -4,19 +4,37 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { SwiperNavigation } from './SwiperNavigation';
 import { useAccountsController } from './useAccountsController';
+import { formatCurrency } from '../../../../../app/utils/formatCurrency';
+import { cn } from '../../../../../app/utils/cn';
 
 export function Accounts() {
-  const { sliderState, setSliderState, windowWidth } = useAccountsController();
+  const {
+    sliderState,
+    setSliderState,
+    windowWidth,
+    valuesVisible,
+    toggleValuesVisibility,
+  } = useAccountsController();
 
   return (
     <div className="bg-teal-900 rounded-2xl w-full h-full md:p-10 px-4 py-8 flex flex-col">
       <div>
-        <span className="block text-white font-light font-Montserrat tracking-wide">Total balance</span>
+        <span className="block text-white font-light font-Montserrat tracking-wide">
+          Total balance
+        </span>
 
         <div className='flex items-center gap-2'>
-          <p className="font-Montserrat text-white text-2xl tracking-wide">R$ 1.000,00</p>
-          <button className='h-10 w-10 flex items-center justify-center'>
-            <EyeIcon open />
+          <p className={cn(
+            'font-Montserrat text-white text-2xl tracking-wide',
+            !valuesVisible && 'blur-[10px]'
+          )}>
+            {formatCurrency(1000)}
+          </p>
+          <button
+            className='h-10 w-10 flex items-center justify-center'
+            onClick={toggleValuesVisibility}
+          >
+            <EyeIcon open={!valuesVisible} />
           </button>
         </div>
       </div>
