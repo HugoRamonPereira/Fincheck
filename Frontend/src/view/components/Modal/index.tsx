@@ -7,11 +7,12 @@ interface ModalProps extends PropsWithChildren {
   open: boolean;
   title: string;
   buttonRightAction?: ReactNode;
+  onClose?(): void;
 }
 
-export function Modal({ open, title, buttonRightAction, children }: ModalProps) {
+export function Modal({ open, title, buttonRightAction, onClose, children }: ModalProps) {
   return (
-    <Dialog.Root open={open}>
+    <Dialog.Root open={open} onOpenChange={onClose}>
       <Dialog.Portal>
         <Dialog.Overlay
           className={cn(
@@ -26,7 +27,10 @@ export function Modal({ open, title, buttonRightAction, children }: ModalProps) 
           )}
         >
           <header className="flex items-center justify-between h-12 text-gray-800">
-            <button className='h-12 w-12'>
+            <button
+              className='flex items-center justify-center h-12 w-12 outline-none'
+              onClick={onClose}
+            >
               <Cross1Icon className='w-5 h-5' />
             </button>
             <span
