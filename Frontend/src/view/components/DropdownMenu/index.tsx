@@ -17,7 +17,12 @@ function DropdownMenuRoot({ children }: { children: React.ReactNode }) {
 
 function DropdownMenuTrigger({ children }: { children: React.ReactNode }) {
   return (
-    <RadixDropdownMenu.Trigger className='outline-none'>
+    // The prop asChild had to be added because we were having a warning in the console
+    // The Radix trigger is a button and we were passing as children another button
+    // And buttons cannot be descendent of another button
+    // We passed as child so that the properties of Radix Trigger are passed down to its first child which is gonna be a button
+    // Radix creates an id and removes the 2 buttons who were nested into each other and the warning disappears
+    <RadixDropdownMenu.Trigger className='outline-none' asChild>
       {children}
     </RadixDropdownMenu.Trigger>
   );

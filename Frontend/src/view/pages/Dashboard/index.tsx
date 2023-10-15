@@ -1,6 +1,4 @@
-import { TrashIcon } from '@radix-ui/react-icons';
 import { Logo } from '../../components/Logo';
-import { Modal } from '../../components/Modal';
 import { UserMenu } from '../../components/userMenu';
 import { Accounts } from './components/Accounts';
 import { DashboardProvider } from './components/DashboardContext';
@@ -25,9 +23,6 @@ export function Dashboard() {
           </div>
         </main>
         <Fab />
-        <Modal open title='Incomes' buttonRightAction={<TrashIcon />}>
-          Content
-        </Modal>
       </div>
     </DashboardProvider>
   );
