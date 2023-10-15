@@ -20,7 +20,7 @@ export function App() {
         <Router />
         <Toaster />
       </AuthProvider>
-      <ReactQueryDevtools position='bottom-right' panelPosition='right' />
+      <ReactQueryDevtools position='bottom-left' panelPosition='right' />
     </QueryClientProvider>
   );
 }

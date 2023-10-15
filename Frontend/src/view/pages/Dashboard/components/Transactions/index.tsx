@@ -1,5 +1,3 @@
-import { ChevronDownIcon } from '@radix-ui/react-icons';
-import { TransactionsIcon } from '../../../../components/icons/TransactionsIcon';
 import { FilterIcon } from '../../../../components/icons/FilterIcon';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { MONTHS } from '../../../../../app/config/constants';
@@ -11,6 +9,7 @@ import { useTransactionsController } from './useTransactionsController';
 import { cn } from '../../../../../app/utils/cn';
 import { Spinner } from '../../../../components/Spinner';
 import noTransactionsIllustration from '../../../../../assets/images/empty-state.svg';
+import { TransactionTypeDropdown } from './TransactionTypeDropdown';
 
 export function Transactions() {
   const { valuesVisible, isInitialLoading, isTransactionsLoading, transactions } = useTransactionsController();
@@ -28,11 +27,7 @@ export function Transactions() {
         <>
           <header className="">
             <div className='flex items-center justify-between'>
-              <button className='flex items-center gap-2'>
-                <TransactionsIcon />
-                <span className='font-Montserrat tracking-wide'>Transactions</span>
-                <ChevronDownIcon className='text-gray-900 font-medium' />
-              </button>
+              <TransactionTypeDropdown />
               <button className=''>
                 <FilterIcon />
               </button>
@@ -58,20 +53,21 @@ export function Transactions() {
             </div>
           </header>
           <div className="mt-4 space-y-2 flex-1 overflow-y-auto">
-
+            {/* Loading for the whole section of transactions */}
             {isTransactionsLoading && (
               <div className='flex flex-1 items-center justify-center h-full'>
                 <Spinner className='w-10 h-10' />
               </div>
             )}
-
+            {/* Loading for transactions of each month */}
+            {/* Some months can have transactions or not */}
             {(!hasTransactions && !isTransactionsLoading) && (
               <div className='flex flex-col h-full items-center justify-center'>
                 <img src={noTransactionsIllustration} alt='no transactions' />
                 <p className='font-Montserrat tracking-wide text-gray-700'>No transactions found!</p>
               </div>
             )}
-
+            {/* Finally the transactions are listed here below */}
             {(hasTransactions && !isTransactionsLoading) && (
               <>
                 <div className='bg-white rounded-2xl p-4 flex items-center justify-between gap-4'>
