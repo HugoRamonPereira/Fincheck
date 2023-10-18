@@ -17,7 +17,7 @@ export const DashboardContext = createContext({} as DashboardContextProps);
 
 export function DashboardProvider({ children }: { children: ReactNode }) {
   const [valuesVisible, setValuesVisible] = useState(true);
-  const [isNewAccountModalOpen, SetIsNewAccountModalOpen] = useState(false);
+  const [isNewAccountModalOpen, SetIsNewAccountModalOpen] = useState(true);
 
   const toggleValuesVisibility = useCallback(() => {
     setValuesVisible(prevState => !prevState);
