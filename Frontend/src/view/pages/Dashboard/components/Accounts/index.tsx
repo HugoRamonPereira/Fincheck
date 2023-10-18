@@ -17,7 +17,8 @@ export function Accounts() {
     valuesVisible,
     toggleValuesVisibility,
     isLoading,
-    accounts
+    accounts,
+    openNewAccountModal
   } = useAccountsController();
 
   return (
@@ -56,7 +57,10 @@ export function Accounts() {
                 <div className='mb-4' slot='container-start'>
                   <p className='font-Montserrat text-white font-light text-lg tracking-wide'>My accounts</p>
                 </div>
-                <button className='flex flex-col items-center justify-center mt-4 h-52 rounded-2xl border-2 border-dashed border-teal-600 gap-4 text-white'>
+                <button
+                  className='flex flex-col items-center justify-center mt-4 h-52 rounded-2xl border-2 border-dashed border-teal-600 gap-4 text-white'
+                  onClick={openNewAccountModal}
+                >
                   <div className='flex items-center justify-center w-11 h-11 rounded-full border-2 border-dashed border-white'>
                     <PlusIcon className='w-5 h-5' />
                   </div>
