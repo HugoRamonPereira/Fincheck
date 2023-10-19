@@ -1,3 +1,5 @@
+import { Button } from '../../../../components/Button';
+import { ColorsDropdown } from '../../../../components/ColorsDropdown';
 import { Input } from '../../../../components/Input';
 import { InputCurrency } from '../../../../components/InputCurrerncy';
 import { Modal } from '../../../../components/Modal';
@@ -9,7 +11,7 @@ export function NewAccountModal() {
 
   return (
     <Modal
-      title='New account'
+      title='New Account'
       open={isNewAccountModalOpen}
       onClose={closeNewAccountModal}
     >
@@ -46,7 +48,11 @@ export function NewAccountModal() {
               },
             ]}
           />
+          <ColorsDropdown />
         </div>
+        <Button className='w-full mt-4'>
+          Create
+        </Button>
       </form>
     </Modal>
   );
