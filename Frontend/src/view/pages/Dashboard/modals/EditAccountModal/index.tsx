@@ -6,6 +6,8 @@ import { InputCurrency } from '../../../../components/InputCurrerncy';
 import { Modal } from '../../../../components/Modal';
 import { Select } from '../../../../components/Select';
 import { useEditAccountModalController } from './useEditAccountModalController';
+import { TrashIcon } from '../../../../components/icons/TrashIcon';
+import { ConfirmDeletionModal } from '../../../../components/ConfirmDeletionModal';
 
 export function EditAccountModal() {
   const {
@@ -15,14 +17,36 @@ export function EditAccountModal() {
     errors,
     handleSubmit,
     control,
-    isLoading
+    isLoading,
+    isLoadingDeletion,
+    isDeletionModalOpen,
+    handleOpenDeletionModal,
+    handleCloseDeletionModal,
+    handleDeleteAccount
   } = useEditAccountModalController();
+
+  if (isDeletionModalOpen) {
+    return (
+      <ConfirmDeletionModal
+        title='Are you sure you want to delete this account?'
+        description='On acount deletion, all registries including incomes and expenses will also be deleted!'
+        onConfirm={handleDeleteAccount}
+        onClose={handleCloseDeletionModal}
+        isLoading={isLoadingDeletion}
+      />
+    );
+  }
 
   return (
     <Modal
       title='Edit Account'
       open={isEditAccountModalOpen}
       onClose={closeEditAccountModal}
+      buttonRightAction={(
+        <button onClick={handleOpenDeletionModal}>
+          <TrashIcon className='w-6 h-6 text-red-900' />
+        </button>
+      )}
     >
       <form onSubmit={handleSubmit}>
         <div>
