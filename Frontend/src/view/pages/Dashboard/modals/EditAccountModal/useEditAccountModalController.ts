@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { BankAccountsService } from '../../../../../app/services/bankAccountsService';
 import { currencyStringToNumber } from '../../../../../app/utils/currencyStringToNumber';
 import toast from 'react-hot-toast';
+import { useState } from 'react';
 
 const schema = z.object({
   // z.union() is used to add 2 possible types, out balance is both number and also string
@@ -42,12 +43,21 @@ export function useEditAccountModalController() {
     }
   });
 
+  const [isDeletionModalOpen, setIsDeletionModalOpen] = useState(false);
   const queryClient = useQueryClient();
-  const { isLoading, mutateAsync } = useMutation(BankAccountsService.update);
+  const {
+    isLoading,
+    mutateAsync: updateAccount
+  } = useMutation(BankAccountsService.update);
+
+  const {
+    isLoading: isLoadingDeletion,
+    mutateAsync: removeAccount
+  } = useMutation(BankAccountsService.remove);
 
   const handleSubmit = hookFormSubmit(async (data) => {
     try {
-      await mutateAsync({
+      await updateAccount({
         ...data,
         // In the id below we used instead of optional chaining operator ?, we used non-null assertion operator !
         // The non-null assertion will tell Typescript that you are sure that null or undefined will never be the values
@@ -56,12 +66,32 @@ export function useEditAccountModalController() {
       });
       // This invalidateQueries is to force React Query after form submission make a new request to bring the new edited values, recalculate and etc...
       queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
-      toast.success('Account edited successfully');
+      toast.success('Account edited successfully!');
       closeEditAccountModal();
     } catch {
-      toast.error('Error saving changes');
+      toast.error('Error saving changes!');
     }
   });
+
+  function handleOpenDeletionModal() {
+    setIsDeletionModalOpen(true);
+  }
+
+  function handleCloseDeletionModal() {
+    setIsDeletionModalOpen(false);
+  }
+
+  async function handleDeleteAccount() {
+    try {
+      await removeAccount(accountBeingEdited!.id);
+
+      queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
+      toast.success('Account deleted successfully!');
+      closeEditAccountModal();
+    } catch {
+      toast.error('Error deleting account!');
+    }
+  }
 
   return {
     isEditAccountModalOpen,
@@ -70,6 +100,11 @@ export function useEditAccountModalController() {
     errors,
     handleSubmit,
     control,
-    isLoading
+    isLoading,
+    isDeletionModalOpen,
+    handleOpenDeletionModal,
+    handleCloseDeletionModal,
+    handleDeleteAccount,
+    isLoadingDeletion
   };
 }
