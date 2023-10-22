@@ -32,13 +32,13 @@ export function Accounts() {
       {!isLoading && (
         <>
           <div>
-            <span className="block text-white font-light font-Montserrat tracking-wide">
+            <span className="block text-white font-light tracking-wide">
               Total balance
             </span>
 
             <div className='flex items-center gap-2'>
               <p className={cn(
-                'font-Montserrat text-white text-2xl tracking-wide',
+                'text-white text-2xl tracking-wide',
                 !valuesVisible && 'blur-[10px]'
               )}>
                 {formatCurrency(currentBalance)}
@@ -56,7 +56,7 @@ export function Accounts() {
             {accounts.length === 0 && (
               <>
                 <div className='mb-4' slot='container-start'>
-                  <p className='font-Montserrat text-white font-light text-lg tracking-wide'>My accounts</p>
+                  <p className='text-white font-light text-lg tracking-wide'>My accounts</p>
                 </div>
                 <button
                   className='flex flex-col items-center justify-center mt-4 h-52 rounded-2xl border-2 border-dashed border-teal-600 gap-4 text-white'
@@ -65,7 +65,7 @@ export function Accounts() {
                   <div className='flex items-center justify-center w-11 h-11 rounded-full border-2 border-dashed border-white'>
                     <PlusIcon className='w-5 h-5' />
                   </div>
-                  <span className='font-Montserrat font-light tracking-wide'>Create a new account</span>
+                  <span className='font-light tracking-wide'>Create a new account</span>
                 </button>
               </>
             )}
@@ -82,7 +82,7 @@ export function Accounts() {
                   }}
                 >
                   <div className='flex items-center justify-between mb-4' slot='container-start'>
-                    <p className='font-Montserrat text-white font-light text-lg tracking-wide'>My accounts</p>
+                    <p className='text-white font-light text-lg tracking-wide'>My accounts</p>
 
                     <SwiperNavigation
                       isBeginning={sliderState.isBeginning}

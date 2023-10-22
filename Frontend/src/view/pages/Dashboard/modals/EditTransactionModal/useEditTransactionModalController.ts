@@ -72,6 +72,7 @@ export function useEditTransactionModalController(
       });
       // This invalidateQueries is to force React Query after form submission make a new request to bring the new transaction we are creating inside this function scope
       queryClient.invalidateQueries({ queryKey: ['transactions'] });
+      queryClient.invalidateQueries({ queryKey: ['bannkAccounts'] });
       toast.success(
         transaction!.type === 'EXPENSE'
           ? 'Expense edited successfully!'
@@ -92,6 +93,7 @@ export function useEditTransactionModalController(
       await removeTransaction(transaction!.id);
 
       queryClient.invalidateQueries({ queryKey: ['transactions'] });
+      queryClient.invalidateQueries({ queryKey: ['bannkAccounts'] });
       toast.success(
         transaction!.type === 'EXPENSE'
           ? 'Expense deleted successfully!'

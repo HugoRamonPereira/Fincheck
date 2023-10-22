@@ -34,7 +34,7 @@ export function Select({
     <div>
       <div className="relative">
         <label className={cn(
-          'absolute font-Montserrat z-10 top-1/2 -translate-y-1/2 left-3 text-gray-700 pointer-events-none',
+          'absolute z-10 top-1/2 -translate-y-1/2 left-3 text-gray-700 pointer-events-none',
           selectedValue && 'text-[10px] left-[13px] top-2 transition-all -translate-y-0'
         )}>
           {placeholder}
@@ -45,7 +45,7 @@ export function Select({
           value={value}
         >
           <RadixSelect.Trigger
-            className={cn('bg-white w-full rounded-lg border border-gray-500 px-3 h-[52px] font-Montserrat text-gray-800 pt-4 focus:border-gray-800 transition-all outline-none text-left relative',
+            className={cn('bg-white w-full rounded-lg border border-gray-500 px-3 h-[52px] text-gray-800 pt-4 focus:border-gray-800 transition-all outline-none text-left relative',
               error && '!border-red-900',
               className
             )}
@@ -72,7 +72,7 @@ export function Select({
                 {options.map(option => (
                   <RadixSelect.Item
                     key={option.value}
-                    className='p-2 font-Montserrat text-gray-800 text-sm data-[state=checked]:font-semibold outline-none data-[highlighted]:bg-gray-100 rounded-lg transition-colors'
+                    className='p-2 text-gray-800 text-sm data-[state=checked]:font-semibold outline-none data-[highlighted]:bg-gray-100 rounded-lg transition-colors'
                     value={option.value}
                   >
                     <RadixSelect.ItemText>{option.label}</RadixSelect.ItemText>
@@ -92,7 +92,7 @@ export function Select({
       {error && (
         <div className='flex items-center gap-1 mt-2 text-red-900'>
           <CrossCircledIcon />
-          <span className='text-red-900 text-xs font-Montserrat'>{error}</span>
+          <span className='text-red-900 text-xs'>{error}</span>
         </div>
       )}
     </div>

@@ -57,7 +57,7 @@ export default {
         },
       },
       fontFamily: {
-        Montserrat: ['"Montserrat"']
+        sans: ['Montserrat', 'sans-serif']
       },
       keyframes: {
         slideUpAndFade: {

@@ -17,7 +17,7 @@ export function InputCurrency({ error, value, onChange }: InputCurrencyProps) {
         value={value}
         onChange={event => onChange?.(event.target.value)}
         className={cn(
-          'w-full text-gray-800 text-[32px] font-Montserrat outline-none',
+          'w-full text-gray-800 text-[32px] outline-none',
           error && 'text-red-900'
         )}
       />
@@ -25,7 +25,7 @@ export function InputCurrency({ error, value, onChange }: InputCurrencyProps) {
       {error && (
         <div className={'flex items-center gap-1 text-red-900'}>
           <CrossCircledIcon />
-          <span className='text-red-900 text-xs font-Montserrat'>{error}</span>
+          <span className='text-red-900 text-xs'>{error}</span>
         </div>
       )}
     </div>

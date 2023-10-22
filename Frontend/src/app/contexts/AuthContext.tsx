@@ -4,8 +4,10 @@ import { useQuery } from '@tanstack/react-query';
 import { usersService } from '../services/UsersService';
 import toast from 'react-hot-toast';
 import { LaunchScreen } from '../../view/components/LaunchScreen';
+import { User } from '../entities/User';
 
 interface AuthContextValue {
+  user: User | undefined;
   signedIn: boolean;
   signin(accessToken: string): void;
   signout(): void;
@@ -21,7 +23,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return !!storedAccessToken;
   });
 
-  const { isError, isFetching, isSuccess } = useQuery({
+  const { isError, isFetching, isSuccess, data } = useQuery({
     queryKey: ['users', 'me'],
     queryFn: () => usersService.me(),
     // enabled is to trigger the request, so the request is gonna happen only if the user is signedin
@@ -57,6 +59,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   return (
     <AuthContext.Provider value={{
       // isSuccess comes from React-Query, so this indicates that we are only signedIn if the request is successful
+      user: data,
       signedIn: isSuccess && signedIn,
       signin,
       signout

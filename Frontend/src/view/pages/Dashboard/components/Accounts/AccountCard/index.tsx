@@ -22,12 +22,12 @@ export function AccountCard({ data }: AccountCardProps) {
       <div>
         <BankAccountTypeIcon type={type} />
 
-        <span className='font-Montserrat font-light block mt-4'>
+        <span className='font-light block mt-4'>
           {name}
         </span>
       </div>
 
-      <div className='font-Montserrat'>
+      <div>
         <span className={cn(
           'font-normal block',
           !valuesVisible && 'blur-[7px]'

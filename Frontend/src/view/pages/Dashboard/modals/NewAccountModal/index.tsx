@@ -27,7 +27,7 @@ export function NewAccountModal() {
       <form onSubmit={handleSubmit}>
         <div>
           <div className='flex items-center gap-2 '>
-            <span className='text-gray-600 font-Montserrat text-lg'>R$</span>
+            <span className='text-gray-600 text-lg'>R$</span>
             <Controller
               control={control}
               name='initialBalance'
@@ -41,7 +41,7 @@ export function NewAccountModal() {
               )}
             />
           </div>
-          <span className='text-gray-600 font-Montserrat text-xs'>Initial Balance</span>
+          <span className='text-gray-600 text-xs'>Initial Balance</span>
         </div>
 
         <div className='mt-10 flex flex-col gap-4'>

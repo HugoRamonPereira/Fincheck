@@ -13,7 +13,7 @@ interface ConfirmDeletionModalProps {
 export function ConfirmDeletionModal({ onConfirm, onClose, title, description, isLoading }: ConfirmDeletionModalProps) {
   return (
     <Modal open title='Delete' onClose={onClose}>
-      <div className='flex flex-col items-center text-center gap-6 font-Montserrat'>
+      <div className='flex flex-col items-center text-center gap-6'>
         <div className='w-[52px] h-[52px] rounded-full bg-red-0 flex items-center justify-center'>
           <TrashIcon className='w-6 h-6 text-red-900' />
         </div>

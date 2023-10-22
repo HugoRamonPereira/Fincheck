@@ -20,15 +20,15 @@ export function DatePicker({ value, onChange }: DatePickerProps) {
         nav: 'flex gap-1',
         nav_button_previous: 'text-teal-800 flex items-center justify-center !bg-transparent',
         nav_button_next: 'text-teal-800 flex items-center justify-center !bg-transparent',
-        head_cell: 'uppercase text-xs text-gray-500 font-Montserrat font-medium pt-1 pb-2',
-        button: 'text-gray-700 cursor-pointer font-Montserrat w-10 h-10 hover:bg-teal-100 rounded-full',
-        day_today: 'bg-gray-100 font-Montserrat font-bold text-gray-900',
-        day_selected: '!bg-teal-900 text-white font-Montserrat font-medium'
+        head_cell: 'uppercase text-xs text-gray-500 font-medium pt-1 pb-2',
+        button: 'text-gray-700 cursor-pointer w-10 h-10 hover:bg-teal-100 rounded-full',
+        day_today: 'bg-gray-100 font-bold text-gray-900',
+        day_selected: '!bg-teal-900 text-white font-medium'
       }}
       formatters={{
         formatCaption: (date, options) => {
           return (
-            <span className='font-Montserrat text-gray-900 font-medium ml-2'>
+            <span className='text-gray-900 font-medium ml-2'>
               {capitalizeFirstLetter(format(date, 'LLLL yyy', options))}
             </span>
           );
