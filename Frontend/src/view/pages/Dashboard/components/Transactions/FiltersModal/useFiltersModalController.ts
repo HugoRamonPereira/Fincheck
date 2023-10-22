@@ -1,12 +1,14 @@
 import { useState } from 'react';
+import { useBankAccounts } from '../../../../../../app/hooks/useBankAccounts';
 
-export function useFiltersModal() {
-  const [selectedBankAccountId, setSelectedBankAccountId] = useState<null | string>(null);
+export function useFiltersModalController() {
+  const [selectedBankAccountId, setSelectedBankAccountId] = useState<undefined | string>(undefined);
   // The value passed in the state is the current year the user is in the moment of the selection of the year
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const { accounts } = useBankAccounts();
 
   function handleSelectBankAccountId(bankAccountId: string) {
-    setSelectedBankAccountId(prevState => prevState === bankAccountId ? null : bankAccountId);
+    setSelectedBankAccountId(prevState => prevState === bankAccountId ? undefined : bankAccountId);
   }
 
   // This function is generic it can increase or decrease the value, this is why we added the parameter called step
@@ -21,6 +23,7 @@ export function useFiltersModal() {
     selectedBankAccountId,
     handleSelectBankAccountId,
     selectedYear,
-    handleChangeYear
+    handleChangeYear,
+    accounts
   };
 }

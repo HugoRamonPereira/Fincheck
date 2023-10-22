@@ -17,11 +17,14 @@ export function Transactions() {
   const {
     valuesVisible,
     isInitialLoading,
-    isTransactionsLoading,
+    isLoading,
     transactions,
     isFiltersModalOpen,
     handleOpenFiltersModal,
     handleCloseFiltersModal,
+    handleChangeFilters,
+    filters,
+    handleApplyFilters
   } = useTransactionsController();
   const hasTransactions = transactions.length > 0;
 
@@ -38,11 +41,15 @@ export function Transactions() {
           <FiltersModal
             open={isFiltersModalOpen}
             onClose={handleCloseFiltersModal}
+            onApplyFilters={handleApplyFilters}
           />
 
           <header className="">
             <div className='flex items-center justify-between'>
-              <TransactionTypeDropdown />
+              <TransactionTypeDropdown
+                onSelect={handleChangeFilters('type')}
+                selectedType={filters.type}
+              />
               <button onClick={handleOpenFiltersModal}>
                 <FilterIcon />
               </button>
@@ -51,6 +58,10 @@ export function Transactions() {
               <Swiper
                 slidesPerView={3}
                 centeredSlides
+                initialSlide={filters.month}
+                onSlideChange={swiper => {
+                  handleChangeFilters('month')(swiper.realIndex);
+                }}
               >
                 <SwiperNavigation />
                 {MONTHS.map((month, index) => (
@@ -69,21 +80,21 @@ export function Transactions() {
           </header>
           <div className="mt-4 space-y-2 flex-1 overflow-y-auto">
             {/* Loading for the whole section of transactions */}
-            {isTransactionsLoading && (
+            {isLoading && (
               <div className='flex flex-1 items-center justify-center h-full'>
                 <Spinner className='w-10 h-10' />
               </div>
             )}
             {/* Loading for transactions of each month */}
             {/* Some months can have transactions or not */}
-            {(!hasTransactions && !isTransactionsLoading) && (
+            {(!hasTransactions && !isLoading) && (
               <div className='flex flex-col h-full items-center justify-center'>
                 <img src={noTransactionsIllustration} alt='no transactions' />
                 <p className='font-Montserrat tracking-wide text-gray-700'>No transactions found!</p>
               </div>
             )}
             {/* Finally the transactions are listed here below */}
-            {(hasTransactions && !isTransactionsLoading) && transactions.map(transaction => (
+            {(hasTransactions && !isLoading) && transactions.map(transaction => (
               <div
                 key={transaction.id}
                 className='bg-white rounded-2xl p-4 flex items-center justify-between gap-4'
