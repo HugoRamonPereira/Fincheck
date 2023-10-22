@@ -11,6 +11,7 @@ import { Spinner } from '../../../../components/Spinner';
 import noTransactionsIllustration from '../../../../../assets/images/empty-state.svg';
 import { TransactionTypeDropdown } from './TransactionTypeDropdown';
 import { FiltersModal } from './FiltersModal';
+import { formatDate } from '../../../../../app/utils/formatDate';
 
 export function Transactions() {
   const {
@@ -82,42 +83,36 @@ export function Transactions() {
               </div>
             )}
             {/* Finally the transactions are listed here below */}
-            {(hasTransactions && !isTransactionsLoading) && (
-              <>
-                <div className='bg-white rounded-2xl p-4 flex items-center justify-between gap-4'>
-                  <div className='flex flex-1 items-center gap-3'>
-                    <CategoryIcon type='expense' />
-                    <div>
-                      <p className='font-Montserrat font-medium'>Lunch</p>
-                      <span className='font-Montserrat text-sm text-gray-600'>04/06/2022</span>
-                    </div>
+            {(hasTransactions && !isTransactionsLoading) && transactions.map(transaction => (
+              <div
+                key={transaction.id}
+                className='bg-white rounded-2xl p-4 flex items-center justify-between gap-4'
+              >
+                <div className='flex flex-1 items-center gap-3'>
+                  <CategoryIcon
+                    type={transaction.type === 'EXPENSE' ? 'expense' : 'income'}
+                    category={transaction.category?.icon}
+                  />
+                  <div>
+                    <p className='font-Montserrat font-medium'>
+                      {transaction.name}
+                    </p>
+                    <span className='font-Montserrat text-sm text-gray-600'>
+                      {formatDate(new Date(transaction.date))}
+                    </span>
                   </div>
-
-                  <span className={cn(
-                    'font-Montserrat text-red-800',
-                    !valuesVisible && 'blur-[7px]'
-                  )}>
-                    {formatCurrency(-1240)}
-                  </span>
                 </div>
-                <div className='bg-white rounded-2xl p-4 flex items-center justify-between gap-4'>
-                  <div className='flex flex-1 items-center gap-3'>
-                    <CategoryIcon type='income' />
-                    <div>
-                      <p className='font-Montserrat font-medium'>Lunch</p>
-                      <span className='font-Montserrat text-sm text-gray-600'>04/06/2022</span>
-                    </div>
-                  </div>
 
-                  <span className={cn(
-                    'font-Montserrat text-green-800',
-                    !valuesVisible && 'blur-[7px]'
-                  )}>
-                    {formatCurrency(4500)}
-                  </span>
-                </div>
-              </>
-            )}
+                <span className={cn(
+                  'font-Montserrat',
+                  transaction.type === 'EXPENSE' ? ' text-red-800' : 'text-green-800',
+                  !valuesVisible && 'blur-[7px]'
+                )}>
+                  {transaction.type === 'EXPENSE' ? '- ' : '+ '}
+                  {formatCurrency(transaction.value)}
+                </span>
+              </div>
+            ))}
           </div>
         </>
       )}
