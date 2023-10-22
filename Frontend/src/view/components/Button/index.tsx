@@ -13,7 +13,7 @@ export function Button({ className, isLoading, disabled, variant, children, ...p
       {...props}
       disabled={disabled || isLoading}
       className={cn(
-        'bg-teal-900 hover:bg-teal-800 disabled:bg-gray-100 text-sm sm:text-base px-6 h-12 rounded-lg font-Montserrat text-gray-100 tracking-wider disabled:text-gray-400 disabled:cursor-not-allowed transition-all flex items-center justify-center',
+        'bg-teal-900 hover:bg-teal-800 disabled:bg-gray-100 text-sm sm:text-base px-6 h-12 rounded-lg text-gray-100 tracking-wider disabled:text-gray-400 disabled:cursor-not-allowed transition-all flex items-center justify-center',
         variant === 'dangerFill' && 'bg-red-900 hover:bg-red-800',
         variant === 'dangerOutline' && 'bg-transparent border border-red-900 text-red-900 hover:bg-red-50',
         className

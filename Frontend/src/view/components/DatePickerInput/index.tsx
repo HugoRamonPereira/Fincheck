@@ -26,12 +26,12 @@ export function DatePickerInput({ error, className, onChange, value }: DatePicke
         <Popover.Trigger>
           <button
             type='button'
-            className={cn('bg-white w-full rounded-lg border border-gray-500 px-3 h-[52px] font-Montserrat text-gray-800 focus:border-gray-800        transition-all outline-none text-left relative pt-4',
+            className={cn('bg-white w-full rounded-lg border border-gray-500 px-3 h-[52px] text-gray-800 focus:border-gray-800        transition-all outline-none text-left relative pt-4',
               error && '!border-red-900',
               className
             )}
           >
-            <span className='absolute text-gray-700 text-[10px] left-[13px] top-2 font-Montserrat pointer-events-none'>
+            <span className='absolute text-gray-700 text-[10px] left-[13px] top-2 pointer-events-none'>
               Date
             </span>
             <span>

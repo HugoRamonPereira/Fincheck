@@ -10,7 +10,7 @@ export function FieldError({ error }: FieldErrorProps) {
       {error && (
         <div className={'flex items-center gap-1 text-red-900'}>
           <CrossCircledIcon />
-          <span className='text-red-900 text-xs font-Montserrat'>{error}</span>
+          <span className='text-red-900 text-xs'>{error}</span>
         </div>
       )}
     </>

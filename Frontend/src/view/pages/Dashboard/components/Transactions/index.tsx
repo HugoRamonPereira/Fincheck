@@ -95,7 +95,7 @@ export function Transactions() {
             {(!hasTransactions && !isLoading) && (
               <div className='flex flex-col h-full items-center justify-center'>
                 <img src={noTransactionsIllustration} alt='no transactions' />
-                <p className='font-Montserrat tracking-wide text-gray-700'>No transactions found!</p>
+                <p className='tracking-wide text-gray-700'>No transactions found!</p>
               </div>
             )}
             {/* Finally the transactions are listed here below */}
@@ -123,17 +123,17 @@ export function Transactions() {
                         category={transaction.category?.icon}
                       />
                       <div>
-                        <p className='font-Montserrat font-medium'>
+                        <p className='font-medium'>
                           {transaction.name}
                         </p>
-                        <span className='font-Montserrat text-sm text-gray-600'>
+                        <span className='text-sm text-gray-600'>
                           {formatDate(new Date(transaction.date))}
                         </span>
                       </div>
                     </div>
 
                     <span className={cn(
-                      'font-Montserrat',
+                      'tracking-wide',
                       transaction.type === 'EXPENSE' ? ' text-red-800' : 'text-green-800',
                       !valuesVisible && 'blur-[7px]'
                     )}>

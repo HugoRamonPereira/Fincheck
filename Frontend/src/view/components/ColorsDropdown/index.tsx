@@ -54,7 +54,7 @@ export function ColorsDropdown({ error, className, onChange, value }: ColorsDrop
       <DropdownMenu.Root>
         <DropdownMenu.Trigger>
           <button
-            className={cn('bg-white w-full rounded-lg border border-gray-500 px-3 h-[52px] font-Montserrat text-gray-800 focus:border-gray-800        transition-all outline-none text-left relative',
+            className={cn('bg-white w-full rounded-lg border border-gray-500 px-3 h-[52px] text-gray-800 focus:border-gray-800        transition-all outline-none text-left relative',
               error && '!border-red-900',
               className
             )}
@@ -87,7 +87,7 @@ export function ColorsDropdown({ error, className, onChange, value }: ColorsDrop
       {error && (
         <div className='flex items-center gap-1 mt-2 text-red-900'>
           <CrossCircledIcon />
-          <span className='text-red-900 text-xs font-Montserrat'>{error}</span>
+          <span className='text-red-900 text-xs'>{error}</span>
         </div>
       )}
     </div>

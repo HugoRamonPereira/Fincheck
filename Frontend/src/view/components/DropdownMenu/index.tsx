@@ -56,7 +56,7 @@ function DropdownMenuItem({ children, className, onSelect }: DropdownMenuProps) 
     <RadixDropdownMenu.Item
       onSelect={onSelect}
       className={cn(
-        'min-h-[40px] flex items-center px-4 py-2 outline-none font-Montserrat text-gray-800 text-sm data-[highlighted]:bg-gray-100 data-[highlighted]:rounded-lg transition-colors cursor-pointer',
+        'min-h-[40px] flex items-center px-4 py-2 outline-none text-gray-800 text-sm data-[highlighted]:bg-gray-100 data-[highlighted]:rounded-lg transition-colors cursor-pointer',
         className
       )}
     >
