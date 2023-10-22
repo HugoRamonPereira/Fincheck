@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useBankAccounts } from '../../../../../app/hooks/useBankAccounts';
 import { useCategories } from '../../../../../app/hooks/useCategories';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Transaction } from '../../../../../app/entities/Transaction';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { transactionsService } from '../../../../../app/services/TransactionsService';
@@ -43,18 +43,27 @@ export function useEditTransactionModalController(
     }
   });
 
-  const { accounts } = useBankAccounts();
-  const { categories: categoriesList } = useCategories();
-  const { isLoading, mutateAsync } = useMutation(transactionsService.update);
   const queryClient = useQueryClient();
+  const { accounts } = useBankAccounts();
+  const [isDeletionModalOpen, setIsDeletionModalOpen] = useState(false);
+  const { categories: categoriesList } = useCategories();
+  const {
+    isLoading,
+    mutateAsync: updateTransaction
+  } = useMutation(transactionsService.update);
 
   const categories = useMemo(() => {
     return categoriesList.filter(category => category.type === transaction?.type);
   }, [categoriesList, transaction]);
 
+  const {
+    isLoading: isLoadingDeletion,
+    mutateAsync: removeTransaction
+  } = useMutation(transactionsService.remove);
+
   const handleSubmit = hookFormSubmit(async data => {
     try {
-      await mutateAsync({
+      await updateTransaction({
         ...data,
         id: transaction!.id,
         value: currencyStringToNumber(data.value),
@@ -78,6 +87,34 @@ export function useEditTransactionModalController(
     }
   });
 
+  async function handleTransactionDeletion() {
+    try {
+      await removeTransaction(transaction!.id);
+
+      queryClient.invalidateQueries({ queryKey: ['transactions'] });
+      toast.success(
+        transaction!.type === 'EXPENSE'
+          ? 'Expense deleted successfully!'
+          : 'Income deleted successfully!'
+      );
+      onClose();
+    } catch {
+      toast.error(
+        transaction!.type === 'EXPENSE'
+          ? 'Error deleting expense!'
+          : 'Error deleting income!'
+      );
+    }
+  }
+
+  function handleOpenDeletionModal() {
+    setIsDeletionModalOpen(true);
+  }
+
+  function handleCloseDeletionModal() {
+    setIsDeletionModalOpen(false);
+  }
+
   return {
     register,
     errors,
@@ -85,6 +122,11 @@ export function useEditTransactionModalController(
     handleSubmit,
     accounts,
     categories,
-    isLoading
+    isLoading,
+    isDeletionModalOpen,
+    isLoadingDeletion,
+    handleTransactionDeletion,
+    handleOpenDeletionModal,
+    handleCloseDeletionModal
   };
 }
