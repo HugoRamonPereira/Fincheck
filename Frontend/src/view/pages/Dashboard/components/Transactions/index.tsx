@@ -12,6 +12,7 @@ import noTransactionsIllustration from '../../../../../assets/images/empty-state
 import { TransactionTypeDropdown } from './TransactionTypeDropdown';
 import { FiltersModal } from './FiltersModal';
 import { formatDate } from '../../../../../app/utils/formatDate';
+import { EditTransactionModal } from '../../modals/EditTransactionModal';
 
 export function Transactions() {
   const {
@@ -24,7 +25,11 @@ export function Transactions() {
     handleCloseFiltersModal,
     handleChangeFilters,
     filters,
-    handleApplyFilters
+    handleApplyFilters,
+    handleOpenEditModal,
+    handleCloseEditModal,
+    isEditModalOpen,
+    transactionBeingEdited
   } = useTransactionsController();
   const hasTransactions = transactions.length > 0;
 
@@ -94,36 +99,51 @@ export function Transactions() {
               </div>
             )}
             {/* Finally the transactions are listed here below */}
-            {(hasTransactions && !isLoading) && transactions.map(transaction => (
-              <div
-                key={transaction.id}
-                className='bg-white rounded-2xl p-4 flex items-center justify-between gap-4'
-              >
-                <div className='flex flex-1 items-center gap-3'>
-                  <CategoryIcon
-                    type={transaction.type === 'EXPENSE' ? 'expense' : 'income'}
-                    category={transaction.category?.icon}
+
+            {(hasTransactions && !isLoading) && (
+              <>
+                {transactionBeingEdited && (
+                  <EditTransactionModal
+                    open={isEditModalOpen}
+                    onClose={handleCloseEditModal}
+                    transaction={transactionBeingEdited}
                   />
-                  <div>
-                    <p className='font-Montserrat font-medium'>
-                      {transaction.name}
-                    </p>
-                    <span className='font-Montserrat text-sm text-gray-600'>
-                      {formatDate(new Date(transaction.date))}
+                )}
+
+                {transactions.map(transaction => (
+                  <div
+                    key={transaction.id}
+                    className='bg-white rounded-2xl p-4 flex items-center justify-between gap-4'
+                    role='button'
+                    onClick={() => handleOpenEditModal(transaction)}
+                  >
+                    <div className='flex flex-1 items-center gap-3'>
+                      <CategoryIcon
+                        type={transaction.type === 'EXPENSE' ? 'expense' : 'income'}
+                        category={transaction.category?.icon}
+                      />
+                      <div>
+                        <p className='font-Montserrat font-medium'>
+                          {transaction.name}
+                        </p>
+                        <span className='font-Montserrat text-sm text-gray-600'>
+                          {formatDate(new Date(transaction.date))}
+                        </span>
+                      </div>
+                    </div>
+
+                    <span className={cn(
+                      'font-Montserrat',
+                      transaction.type === 'EXPENSE' ? ' text-red-800' : 'text-green-800',
+                      !valuesVisible && 'blur-[7px]'
+                    )}>
+                      {transaction.type === 'EXPENSE' ? '- ' : '+ '}
+                      {formatCurrency(transaction.value)}
                     </span>
                   </div>
-                </div>
-
-                <span className={cn(
-                  'font-Montserrat',
-                  transaction.type === 'EXPENSE' ? ' text-red-800' : 'text-green-800',
-                  !valuesVisible && 'blur-[7px]'
-                )}>
-                  {transaction.type === 'EXPENSE' ? '- ' : '+ '}
-                  {formatCurrency(transaction.value)}
-                </span>
-              </div>
-            ))}
+                ))}
+              </>
+            )}
           </div>
         </>
       )}
