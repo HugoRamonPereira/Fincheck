@@ -13,7 +13,7 @@ export function TransactionTypeDropdown({ onSelect, selectedType }: TransactionT
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>
-        <button className='flex items-center gap-2'>
+        <button className='flex items-center gap-2 p-3 sm:p-0'>
           {selectedType === 'INCOME' && <IncomeIcon />}
           {selectedType === 'EXPENSE' && <ExpensesIcon />}
           {selectedType === undefined && <TransactionsIcon />}

@@ -55,7 +55,10 @@ export function Transactions() {
                 onSelect={handleChangeFilters('type')}
                 selectedType={filters.type}
               />
-              <button onClick={handleOpenFiltersModal}>
+              <button
+                className='pr-2 sm:pr-0'
+                onClick={handleOpenFiltersModal}
+              >
                 <FilterIcon />
               </button>
             </div>

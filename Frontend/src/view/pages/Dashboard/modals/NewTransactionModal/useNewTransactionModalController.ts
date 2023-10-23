@@ -14,7 +14,7 @@ const schema = z.object({
   value: z.string().nonempty('Value is required!'),
   name: z.string().nonempty('Name is required!'),
   categoryId: z.string().nonempty('Category is required!'),
-  bankAccountId: z.string().nonempty('Category is required!'),
+  bankAccountId: z.string().nonempty('Bank is required!'),
   date: z.date()
 });
 
