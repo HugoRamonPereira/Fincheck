@@ -1,6 +1,7 @@
 # FINCHECK - App to manage your finances and budget
 
 <img src='./Frontend/src/assets/images/fincheck-web.gif' />
+<img src='./Frontend/src/assets/images/fincheck-login-page.png' />
 <img src='./Frontend/src/assets/images/fincheck-web.png' />
 
 
@@ -74,3 +75,6 @@ The command yarn build will execute tsc which means Typescript Compiler that wil
 ## API COMSUME USING AXIOS & REACT QUERY
 
 To handle our requests to the backend we are using [Axios](https://axios-http.com/) and also [React Query](https://tanstack.com/query/v4/).
+
+# License
+© Done with a lot of &#10084; by Hugo Ramon Pereira -> [Portfolio](https://hugoramonpereira.dev/) -> [LinkedIn](https://www.linkedin.com/in/hugo-ramon-pereira/) 🇧🇷
